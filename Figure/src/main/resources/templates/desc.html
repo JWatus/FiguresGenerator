@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/slate/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-A0hm/Pn0Gvk8w7szlEuTOZrIyQCCBNXQF9ccseoCI36nWRfMEAapo5UJ56zLPvPw" crossorigin="anonymous">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">List of figures</h1>
+            <p class="lead">This is list of figures with their perimeters and areas.</p>
+        </div>
+    </div>
+</head>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Type</th>
+            <th scope="col">Area</th>
+            <th scope="col">Perimeter</th>
+            <th scope="col">Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="figure : ${results}">
+            <td th:utext="${figure.getFigure().getId()}">...</td>
+            <td th:utext="${figure.getType()}">...</td>
+            <td th:utext="${figure.getArea()}">...</td>
+            <td th:utext="${figure.getPerimeter()}">...</td>
+            <td th:utext="${figure.getCssToPaint()}">...</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        function deleteFigure() {
+            var figure = document.getElementById('figure').value;
+            if (figure <= 5 && figure >= 1) {
+                window.location = "/application/deleteChosen/" + figure;
+            } else {
+                window.location = "/"
+            }
+        }
+    </script>
+    <input placeholder="Put ID here" type="text" id="figure"/>
+    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Delete by ID"
+           onclick="deleteFigure();"/>
+
+    <form action="/" method="get">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go back to home page</button>
+    </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
