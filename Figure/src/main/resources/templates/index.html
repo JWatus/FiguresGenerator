@@ -38,7 +38,7 @@
             <script type="text/javascript">
                 function goToFigure() {
                     var figure = document.getElementById('figure').value;
-                    if (figure <= 5 && figure >= 1) {
+                    if (figure > 0) {
                         window.location = "/application/showChosen/" + figure;
                     } else {
                         window.location = "/"

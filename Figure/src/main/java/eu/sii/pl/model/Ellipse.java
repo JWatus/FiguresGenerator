@@ -4,6 +4,7 @@ import eu.sii.pl.service.figures_painters.EllipsePainter;
 import eu.sii.pl.service.interfaces.AreaCalculator;
 import eu.sii.pl.service.figures_calculators.EllipseCalculator;
 import eu.sii.pl.service.interfaces.Painter;
+import eu.sii.pl.service.interfaces.PerimeterCalculator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,11 @@ public class Ellipse extends Figure {
     private double radiusX;
     @Column(name = "RADIUS_Y")
     private double radiusY;
+
+    @Override
+    public PerimeterCalculator getPerimeterCalculator() {
+        return new EllipseCalculator();
+    }
 
     @Override
     public AreaCalculator getAreaCalculator() {

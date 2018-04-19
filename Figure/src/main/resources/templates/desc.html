@@ -41,10 +41,10 @@
     <script type="text/javascript">
         function deleteFigure() {
             var figure = document.getElementById('figure').value;
-            if (figure <= 5 && figure >= 1) {
-                window.location = "/application/deleteChosen/" + figure;
+            if (figure > 0) {
+                window.location = "/application/deleteChosenByIdDesc/" + figure;
             } else {
-                window.location = "/"
+                window.location = "/application/showResultsByIdDesc"
             }
         }
     </script>

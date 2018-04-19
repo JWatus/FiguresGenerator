@@ -1,5 +1,8 @@
 package eu.sii.pl.model;
 
+import eu.sii.pl.service.figures_painters.TrianglePainter;
+import eu.sii.pl.service.interfaces.AreaCalculator;
+import eu.sii.pl.service.interfaces.Painter;
 import eu.sii.pl.service.interfaces.PerimeterCalculator;
 import eu.sii.pl.service.figures_calculators.TriangleCalculator;
 
@@ -17,8 +20,18 @@ public class Triangle extends Figure {
     private double side3;
 
     @Override
+    public AreaCalculator getAreaCalculator() {
+        return new TriangleCalculator();
+    }
+
+    @Override
     public PerimeterCalculator getPerimeterCalculator() {
         return new TriangleCalculator();
+    }
+
+    @Override
+    public Painter getPainter() {
+        return new TrianglePainter();
     }
 
     public Triangle() {

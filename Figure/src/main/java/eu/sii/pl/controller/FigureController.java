@@ -3,7 +3,8 @@ package eu.sii.pl.controller;
 import eu.sii.pl.model.*;
 import eu.sii.pl.repository.FigureRepository;
 import eu.sii.pl.results.Results;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import java.util.Random;
 @RequestMapping("/application")
 public class FigureController {
 
-    private static final Logger LOGGER = Logger.getLogger(FigureController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FigureController.class.getName());
 
     @Autowired
     private FigureRepository figureRepository;
@@ -27,20 +28,25 @@ public class FigureController {
     @GetMapping("/showChosen/{name}")
     public ModelAndView getChosenFigureResults(@PathVariable(name = "name") Long id) {
 
-        Figure figure = figureRepository.findById(id).orElseThrow(
-                () -> new NoSuchElementException()
-        );
+        ModelAndView result;
 
-        Results chosen = new Results(figure,
-                figure.getAreaCalculator().calculateArea(figure),
-                figure.getPerimeterCalculator().calculatePerimeter(figure),
-                figure.getPainter().paint(figure));
+        try {
+            Figure figure = figureRepository.findById(id).orElseThrow(
+                    () -> new NoSuchElementException()
+            );
 
-        ModelAndView result = new ModelAndView("get_one");
-        result.addObject("result", chosen);
+            Results chosen = new Results(figure,
+                    figure.getAreaCalculator().calculateArea(figure),
+                    figure.getPerimeterCalculator().calculatePerimeter(figure),
+                    figure.getPainter().paint(figure));
+            result = new ModelAndView("chosen");
+            result.addObject("result", chosen);
+        } catch (Exception e) {
+            LOGGER.warn("Wrong argument", e);
+            result = new ModelAndView("index");
+        }
         return result;
     }
-
 
     @GetMapping("/showResults")
     public ModelAndView getAllFiguresResults() {
@@ -52,8 +58,8 @@ public class FigureController {
                     figure.getPerimeterCalculator().calculatePerimeter(figure),
                     figure.getPainter().paint(figure)));
 
-            LOGGER.info("Area of " + figure.getClass().getSimpleName() + " is " + figure.getAreaCalculator().calculateArea(figure));
-            LOGGER.info("Perimeter of " + figure.getClass().getSimpleName() + " is " + figure.getPerimeterCalculator().calculatePerimeter(figure));
+            LOGGER.info("Area of {} is {}", figure.getClass().getSimpleName(), figure.getAreaCalculator().calculateArea(figure));
+            LOGGER.info("Perimeter of {} is {} ", figure.getClass().getSimpleName(), figure.getPerimeterCalculator().calculatePerimeter(figure));
         }
         ModelAndView results = new ModelAndView("asc");
         results.addObject("results", resultsList);
@@ -70,8 +76,8 @@ public class FigureController {
                     figure.getPerimeterCalculator().calculatePerimeter(figure),
                     figure.getPainter().paint(figure)));
 
-            LOGGER.info("Area of " + figure.getClass().getSimpleName() + " is " + figure.getAreaCalculator().calculateArea(figure));
-            LOGGER.info("Perimeter of " + figure.getClass().getSimpleName() + " is " + figure.getPerimeterCalculator().calculatePerimeter(figure));
+            LOGGER.info("Area of {} is {}", figure.getClass().getSimpleName(), figure.getAreaCalculator().calculateArea(figure));
+            LOGGER.info("Perimeter of {} is {} ", figure.getClass().getSimpleName(), figure.getPerimeterCalculator().calculatePerimeter(figure));
         }
         ModelAndView results = new ModelAndView("desc");
         results.addObject("results", resultsList);
@@ -83,9 +89,23 @@ public class FigureController {
         return "random";
     }
 
+    @GetMapping("/deleteChosenByIdDesc/{name}")
+    public RedirectView deleteChosenByIdDescFigureResults(@PathVariable(name = "name") Long id) {
+        try {
+            figureRepository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.warn("Wrong argument", e);
+        }
+        return new RedirectView("/application/showResultsByIdDesc");
+    }
+
     @GetMapping("/deleteChosen/{name}")
     public RedirectView deleteChosenFigureResults(@PathVariable(name = "name") Long id) {
-        figureRepository.deleteById(id);
+        try {
+            figureRepository.deleteById(id);
+        } catch (Exception e) {
+            LOGGER.warn("Wrong argument", e);
+        }
         return new RedirectView("/application/showResults");
     }
 

@@ -4,6 +4,7 @@ import eu.sii.pl.service.figures_painters.CirclePainter;
 import eu.sii.pl.service.interfaces.AreaCalculator;
 import eu.sii.pl.service.figures_calculators.CircleCalculator;
 import eu.sii.pl.service.interfaces.Painter;
+import eu.sii.pl.service.interfaces.PerimeterCalculator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,11 @@ public class Circle extends Figure {
 
     @Column(name="RADIUS")
     private double radius;
+
+    @Override
+    public PerimeterCalculator getPerimeterCalculator() {
+        return new CircleCalculator();
+    }
 
     @Override
     public AreaCalculator getAreaCalculator() {
