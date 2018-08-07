@@ -14,7 +14,7 @@ All You need to do is to download this app and run SpringBootApplication.
 
 Open your favorite browser and type:
 
-    *  [http://localhost:8080](http://localhost:8080/)
+* [http://localhost:8080](http://localhost:8080)
 
 #### Options
 
