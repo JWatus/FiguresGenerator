@@ -1,8 +1,8 @@
-##Figure Generator Application
+## Figure Generator Application
 
-#####This is simple figure generator application created for training skills in Spring framework and Bootstrap.
+##### This is simple figure generator application created for training skills in Spring framework and Bootstrap.
 
-####How to start
+#### How to start
 
 This project use the following ports :
 
@@ -14,9 +14,9 @@ All You need to do is to download this app and run SpringBootApplication.
 
 Open your favorite browser and type:
 
-    * [http://localhost:8080](http://localhost:8080/)
+    *  [http://localhost:8080](http://localhost:8080/)
 
-####Options
+#### Options
 
 In this app database has several figures added at initialization.
 You can :
