@@ -20,9 +20,9 @@ Open your favorite browser and type:
 
 In this app database has several figures added at initialization.
 You can :
-- Displaying figures in ascending order
-- Displaying figures in descending order
-- Finding specific figure by its ID
-- Deleting chosen figure from database
+- Display figures in ascending order
+- Display figures in descending order
+- Find specific figure by its ID
+- Delete chosen figure from database
 
 Soon there will be a lot more options. Enjoy!
