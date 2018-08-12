@@ -1,6 +1,6 @@
 ## Figure Generator Application
 
-##### This is simple figure generator application created for training skills in Spring framework and Bootstrap.
+#### This is simple figure generator application created for training skills in Spring framework and Bootstrap.
 
 #### How to start
 
@@ -20,6 +20,7 @@ Open your favorite browser and type:
 
 In this app database has several figures added at initialization.
 You can :
+- Add figure with chosen shape and random parameters
 - Display figures in ascending order
 - Display figures in descending order
 - Find specific figure by its ID
