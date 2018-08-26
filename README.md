@@ -1,4 +1,4 @@
-## Figure Generator Application :small_blue_diamond: :white_small_square: :small_orange_diamond: :black_small_square:  
+## Figure Generator Application :small_blue_diamond: :small_orange_diamond: 
 
 #### This is simple figure generator application created for training skills in Spring framework and Bootstrap.
 
